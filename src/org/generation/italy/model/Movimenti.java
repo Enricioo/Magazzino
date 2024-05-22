@@ -10,5 +10,5 @@ public class Movimenti {
 	public String codProdottoSpostato;
 	public int qtaProdotto;
 	public String riferimento;
-
+	public String tipoMovimento;
 }

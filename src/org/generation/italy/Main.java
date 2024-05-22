@@ -39,7 +39,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		Movimenti mov;
 		int codInserito;
-		String risposta;
+		String risposta;	
 		boolean giacValida;
 		String codiceProdottoGiacenza;
 		ArrayList<Movimenti> elencoMovimenti = new ArrayList<Movimenti>();
@@ -81,27 +81,33 @@ public class Main {
 				put("U04", "spostamento a altro magazzino");
 			}
 		};
+		// Inizio ciclo operazioni
 		do {
 			mov = new Movimenti();
 			System.out.println("Che tipo di operazione vuoi effettuare?");
-			System.out.println(
-					"\u001B[33m1. Inserire movimenti in entrata \n\u001B[31m2. Inserire movimenti in uscita \n\u001B[32m3. Visualizzazione movimenti in entrata \n\u001B[35m4. Visualizzazione movimenti in uscita \n\u001B[36m5. Giacenza prodotto\u001B[37m");
-
+			System.out.println("\u001B[33m" + "1. Inserire movimenti in entrata \n" + "\u001B[31m"
+					+ "2. Inserire movimenti in uscita \n" + "\u001B[32m" + "3. Visualizzazione movimenti in entrata \n"
+					+ "\u001B[35m" + "4. Visualizzazione movimenti in uscita \n" + "\u001B[36m"
+					+ "5. Giacenza prodotto \n" + "\u001B[37m" + "6. Lista completa dei movimenti");
 			codInserito = sc.nextInt();
 			sc.nextLine();
-
-			if (codInserito == 0 || codInserito > 5) {
+			// Verifica se il codice è errato
+			if (codInserito <= 0 || codInserito > 6) {
 				do {
 					System.out.println("Il codice inserito è errato, riprova!");
-					System.out.println(
-							"\u001B[33m1. Inserire movimenti in entrata \n\u001B[31m2. Inserire movimenti in uscita \n\u001B[32m3. Visualizzazione movimenti in entrata \n\u001B[35m4. Visualizzazione movimenti in uscita \n\u001B[36m5. Giacenza prodotto\u001B[37m");
+					System.out.println("\u001B[33m" + "1. Inserire movimenti in entrata \n" + "\u001B[31m"
+							+ "2. Inserire movimenti in uscita \n" + "\u001B[32m"
+							+ "3. Visualizzazione movimenti in entrata \n" + "\u001B[35m"
+							+ "4. Visualizzazione movimenti in uscita \n" + "\u001B[36m" + "5. Giacenza prodotto \n"
+							+ "\u001B[37m" + "6. Lista completa dei movimenti");
 					codInserito = sc.nextInt();
 					sc.nextLine();
-				} while (codInserito <= 0 || codInserito > 5);
+				} while (codInserito <= 0 || codInserito > 6);
 			}
-
+			// Verifica quale operazione fare
 			if (codInserito == 1) {
-				System.out.println("\u001B[33mInserimento movimento in entrata...");
+				// Inserimento movimento in entrata
+				System.out.println("\u001B[33m" + "Inserimento movimento in entrata...");
 				System.out.println("Inserisci la data: ");
 				mov.data = LocalDate.parse(sc.nextLine(), df);
 				System.out.println("Inserisci codice prodotto: ");
@@ -117,7 +123,8 @@ public class Main {
 				elencoEntrate.add(mov);
 				elencoMovimenti.add(mov);
 			} else if (codInserito == 2) {
-				System.out.println("\u001B[31mInserimento movimento in uscita...");
+				// Inserimento movimento in uscita
+				System.out.println("\u001B[31m" + "Inserimento movimento in uscita...");
 				System.out.println("Inserisci la data: ");
 				mov.data = LocalDate.parse(sc.nextLine(), df);
 				System.out.println("Inserisci codice prodotto: ");
@@ -127,15 +134,16 @@ public class Main {
 				sc.nextLine();
 				System.out.println("Inserisci codice movimento: ");
 				mov.codMovimento = sc.nextLine();
-				System.out.println("\u001B[36m(Opzionale)\u001B[31mInserisci riferimento: ");
+				System.out.println("\u001B[36m" + "(Opzionale)" + "\u001B[31m" + "Inserisci riferimento: ");
 				mov.riferimento = sc.nextLine();
 				System.out.print("\u001B[37m");
 				elencoUscite.add(mov);
 				elencoMovimenti.add(mov);
 			} else if (codInserito == 3) {
-				System.out.println("Elenco dei movimenti in entrata: ");
+				// Elenco dei movimenti in entrata
+				System.out.println("\u001B[32m" + "Elenco dei movimenti in entrata: " + "\u001B[37m");
 				for (int i = 0; i < elencoEntrate.size(); i++) {
-					System.out.println("Movimento in entrata n." + (i + 1) + ":");
+					System.out.println("\u001B[32m" + "Movimento in entrata n." + (i + 1) + ":");
 					for (String prodotto : elencoProdotti.keySet()) {
 						if (prodotto.equals(elencoEntrate.get(i).codProdotto)) {
 							System.out.println("Il prodotto in entrata: " + elencoProdotti.get(prodotto));
@@ -148,32 +156,36 @@ public class Main {
 					for (String tipologia : elencoTipologie.keySet()) {
 						if (tipologia.equals(elencoTipologie.get(tipologia)))
 							;
-						System.out.println("L'operazione effettuata è: " + elencoEntrate.get(i).codMovimento);
+						System.out.println("L'operazione effettuata è: " + elencoTipologie.get(tipologia));
+						System.out.print("\u001B[37m");
 						break;
 					}
 
 				}
 
 			} else if (codInserito == 4) {
-				System.out.println("Elenco dei movimenti in entrata: ");
+				// Elenco dei movimenti in uscita
+				System.out.println("\u001B[35m" + "Elenco dei movimenti in uscita: " + "\u001B[37m");
 				for (int i = 0; i < elencoUscite.size(); i++) {
-					System.out.println("Movimento in entrata n." + (i + 1) + ":");
+					System.out.println("\u001B[35m" + "Movimento in uscita n." + (i + 1) + ":");
 					for (String prodotto : elencoProdotti.keySet()) {
 						if (prodotto.equals(elencoUscite.get(i).codProdotto)) {
-							System.out.println("Il prodotto in entrata: " + elencoProdotti.get(prodotto));
+							System.out.println("Il prodotto in uscita: " + elencoProdotti.get(prodotto));
 						}
 					}
 					System.out
-							.println("È stato importato in magazzino in data: " + elencoUscite.get(i).data.format(df));
-					System.out.println("È stato importato nella seguente quantità: " + elencoUscite.get(i).qtaProdotto);
+							.println("È stato esportato dal magazzino in data: " + elencoUscite.get(i).data.format(df));
+					System.out.println("È stato esportato nella seguente quantità: " + elencoUscite.get(i).qtaProdotto);
 					for (String tipologia : elencoTipologie.keySet()) {
 						if (tipologia.equals(elencoUscite.get(i).codMovimento))
 							;
 						System.out.println("L'operazione effettuata è: " + elencoTipologie.get(tipologia));
+						System.out.print("\u001B[37m");
 						break;
 					}
 				}
 			} else if (codInserito == 5) {
+				// Visualizzazione giacenza
 				do {
 					giacValida = false;
 					System.out.println("Di quale prodotto vuoi vedere la giacenza?");
